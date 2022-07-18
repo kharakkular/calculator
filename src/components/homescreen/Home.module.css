@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    grid-template-columns: minmax(400px, 30%);
+    grid-template-rows: 10vh 80vh 10vh;
+    justify-content: center;
+    color: white;
+}
+
+.main {
+    grid-row: 2 / span 1;
+    background-color: rgb(31, 38, 39);
+}
