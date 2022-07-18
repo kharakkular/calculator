@@ -1,0 +1,9 @@
+.keypad {
+    height: 75%;
+    padding: .5rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
+}

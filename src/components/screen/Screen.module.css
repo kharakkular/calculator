@@ -1,0 +1,15 @@
+.screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 35%;
+    padding: .5rem;
+    font-size: 2rem;
+    border: none;
+}
+
+.typedValue {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
