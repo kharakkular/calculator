@@ -8,7 +8,7 @@ const Keypad = props => {
     const secondRow = ['7', '8', '9', '*'].map((val, index) => <Button key={index} name={val} />);
     const thirdRow = ['4', '5', '6', '-'].map((val, index) => <Button key={index} name={val} />);
     const fourthRow = ['1', '2', '3', '+'].map((val, index) => <Button key={index} name={val} />);
-    const fifthRow = ['0', '.', '', '='].map((val, index) => <Button key={index} name={val} />);
+    const fifthRow = ['0', '.', 'backspace', '='].map((val, index) => <Button key={index} name={val} />);
 
     return (
         <div className={classes.keypad}>

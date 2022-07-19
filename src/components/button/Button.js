@@ -1,11 +1,30 @@
-// import { Fragment } from "react";
+import { useDispatch } from 'react-redux';
 
+import { calculatorActions } from '../../store/calculator';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useRef } from 'react';
 import classes from './Button.module.css';
 
-const Button = (props) => {
+const Button = ({ name }) => {
+    // const clickedButton = useRef();
+    const dispatch = useDispatch();
+
+    const onClickHandler = () => {
+        console.log(`Value: ${name}`);
+        dispatch(calculatorActions.keypadButtonValue(name));
+    };
+
+    if(name === 'backspace') {
+        return (
+            <div onClick={onClickHandler} className={classes.button}>
+                <span><i className="fa-solid fa-delete-left"></i></span>
+            </div>
+        );
+    }
+
     return (
-        <div className={classes.button}>
-            <span>{props.name}</span>
+        <div onClick={onClickHandler} className={classes.button}>
+            <span>{name}</span>
         </div>
     );
 }
