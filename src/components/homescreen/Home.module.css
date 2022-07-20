@@ -1,6 +1,6 @@
 .container {
     display: grid;
-    grid-template-columns: minmax(350px, 30%);
+    grid-template-columns: minmax(350px, 350px);
     grid-template-rows: 10vh 80vh 10vh;
     justify-content: center;
     color: white;

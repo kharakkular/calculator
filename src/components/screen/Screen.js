@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector} from 'react-redux';
+
 import classes from './Screen.module.css';
 
 const Screen = props => {
     
-    const [typedValue, setTypedValue] = useState(0);
-    
+    const keyPressed = useSelector(state => state.calculator.buttonPressed);
+    const number = useSelector(state => state.calculator.number);
+    const [typedValue, setTypedValue] = useState(number);
+ 
+    useEffect(()=> {
+        setTypedValue(number);
+    }, [number,keyPressed]);
+
     return (
         <div className={classes.screen}>
             <div className={classes.result}></div>
