@@ -10,7 +10,6 @@ const Screen = props => {
     const equation = useSelector(state => state.calculator.equation);
     const total = useSelector(state => state.calculator.total);
     const [typedValue, setTypedValue] = useState();
-    console.log({equation, number});
  
     useEffect(()=> {
         setTypedValue(equation.join(''));

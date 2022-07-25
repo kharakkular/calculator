@@ -11,7 +11,6 @@ const Keypad = props => {
     // const equation = useSelector(state => state.calculator.equation);
     const isNewNumber = useSelector(state => state.calculator.isNewNumber);
     // const operationKeyPressed = useSelector(state => state.calculator.operationKeyPressed);
-    console.log(`Key pressed from keypad is ${keyPressed}`);
     const dispatch = useDispatch();
 
     const buttonPressedHandler = (name) => {
@@ -45,7 +44,6 @@ const Keypad = props => {
     }, [keyPressed, dispatch]);
 
     useEffect(() => {
-        console.log(`Value of isNewNumber from calculator.js "${isNewNumber}"`);
         if(isNewNumber) {
             const tempObj = {
                 key: keyPressed,
@@ -58,6 +56,12 @@ const Keypad = props => {
     useEffect(() => {
         dispatch(calculatorActions.calculateTotal());
     }, [dispatch, currentNumber]);
+
+    useEffect(()=>{
+        if(['+','-','*','/'].includes(keyPressed)){
+            dispatch(calculatorActions.changeOperationSign(keyPressed));
+        }
+    },[dispatch, keyPressed])
 
     return (
         <div className={classes.keypad}>

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { calculatingTotalValue } from './extra-calculations';
+
 const initialState = {
     total: 0,
     buttonPressed: '',
@@ -18,9 +20,9 @@ const calculatorSlice = createSlice({
             state.equation = [];
         },
         backspaceCurrentNumberValue(state){
-            const currentValue = state.currentNumber;
-            console.log(currentValue.length);
-            if(currentValue.length === 1) {
+            let currentValue = state.currentNumber;
+            const arr = [...state.equation];
+            if(currentValue.length === 1 && arr.length === 1 && arr[0] === '0') {
                 if(currentValue === '0'){
                     return;
                 }
@@ -28,18 +30,22 @@ const calculatorSlice = createSlice({
                 state.equation[state.equation.length -1] = '0';
                 return;
             }
+            if(arr[arr.length -1] === '') {
+                arr.pop();
+                currentValue = arr[arr.length-1];
+            }
             const numArray = currentValue.split('');
             numArray.pop();
             state.currentNumber = numArray.join('');
-            state.equation[state.equation.length -1] = numArray.join('');
+            arr[arr.length - 1] = numArray.join('');
+            state.equation = arr;
+            state.total = calculatingTotalValue(arr);
         },
         keypadButtonValue(state, action){
             const keyPressed = action.payload;
             state.buttonPressed = keyPressed;
         },
         calculateCurrentNumberValue(state, action) {
-            // const currentIndex = state.equation.length;
-            // console.log(currentIndex);
             let currentValue = action.payload;
             let calculatedValue = state.currentNumber;
             // If the button pressed is "0,1,2,3,4,5,6,7,8,9,Dot"
@@ -70,75 +76,34 @@ const calculatorSlice = createSlice({
                     calculatedValue += currentValue;
                 }
                 state.currentNumber = calculatedValue;
-                // if(currentIndex === 0) {
-                //     state.equation.push(calculatedValue);
-                // }
-                // state.equation[state.equation.length - 1] = calculatedValue;
             }
         },
         recordingNumbersAndOperations(state, action){
             const length = state.equation.length;
-            console.log({payload: action.payload});
-            // const lastItem = state.equation[length - 1];
-            // if(['+','-','*','/'].includes(lastItem)){
-            //     if(state.buttonPressed !== lastItem){
-            //         state.equation[length-1] = action.payload.operation;
-            //         return;
-            //     }
-            //     return;
-            // }
-            // state.equation.push(action.payload.number);
-            // state.equation.push(action.payload.operation);
-            // state.currentNumber = '0';
-            // state.isNewNumber = false;
             if(['1','2','3','4','5','6','7','8','9','0','.'].includes(action.payload.key)){
                 if(length === 0){
                     state.equation.push(action.payload.number);
                 }
                 state.equation[length-1] = action.payload.number;
             }
-            if(['+','-','*','/'].includes(action.payload.key)){
-                console.log(`Button pressed is ${state.buttonPressed}`);
+            if(['+','-','*','/'].includes(action.payload.key) && length !== 0){
+                if(state.equation[length-1] === '' && ['+','-','*','/'].includes(state.equation[length-2])){
+                    state.equation[length-2] = action.payload.key;
+                }
                 state.equation.push(state.buttonPressed, '');
-                state.currentNumber = '0';
+                state.currentNumber = '';
                 state.isNewNumber = false;
             }
         },
         calculateTotal(state) {
             const arr = [...state.equation];
-            let arrLength = arr.length;
-            let total = 0;
-            while(arrLength > 2){
-                const add = arr.includes('+');
-                let tempTotal = 0;
-                const minus = arr.includes('-');
-                if(minus) {
-                    const minusIndex = arr.findIndex(a => a === '-');
-                    const preNum = +arr[minusIndex-1];
-                    const postNum = +arr[minusIndex+1];
-                    tempTotal = preNum - postNum;
-                    arr.splice(minusIndex-1, 3, tempTotal);
-                    arrLength -= 2;
-                    if(arrLength > 2){
-                        continue;
-                    }
-                }
-                if(add){
-                    const addIndex = arr.findIndex(a => a === '+');
-                    const preNum = +arr[addIndex-1];
-                    const postNum = +arr[addIndex+1];
-                    tempTotal = preNum + postNum;
-                    arr.splice(addIndex-1, 3, tempTotal);
-                    console.log(`Array after adding is ${arr}`);
-                    // total += sum;
-                    arrLength -= 2;
-                    if(arrLength > 2) {
-                        continue;
-                    }
-                }
-                total += tempTotal;
+            state.total = calculatingTotalValue(arr);
+        },
+        changeOperationSign(state,action){
+            const length = state.equation.length;
+            if(state.equation[length-1] === '' && ['+','-','*','/'].includes(state.equation[length-2])){
+                state.equation[length-2] = action.payload;
             }
-            state.total = total;
         }
     }
 });

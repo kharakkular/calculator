@@ -3,7 +3,6 @@ import classes from './ActiveScreen.module.css';
 const ActiveScreen = props => {
 
     const { value } = props;
-    // console.log({value});
     return (
         <div className={classes.typedValue}>
             <span className={classes.equalSign}><i className="fa-solid fa-equals"></i></span>
