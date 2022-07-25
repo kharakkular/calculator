@@ -110,13 +110,25 @@ const calculatorSlice = createSlice({
             let total = 0;
             while(arrLength > 2){
                 const add = arr.includes('+');
-                let sum = 0;
+                let tempTotal = 0;
+                const minus = arr.includes('-');
+                if(minus) {
+                    const minusIndex = arr.findIndex(a => a === '-');
+                    const preNum = +arr[minusIndex-1];
+                    const postNum = +arr[minusIndex+1];
+                    tempTotal = preNum - postNum;
+                    arr.splice(minusIndex-1, 3, tempTotal);
+                    arrLength -= 2;
+                    if(arrLength > 2){
+                        continue;
+                    }
+                }
                 if(add){
                     const addIndex = arr.findIndex(a => a === '+');
                     const preNum = +arr[addIndex-1];
                     const postNum = +arr[addIndex+1];
-                    sum = preNum + postNum;
-                    arr.splice(addIndex-1, 3, sum);
+                    tempTotal = preNum + postNum;
+                    arr.splice(addIndex-1, 3, tempTotal);
                     console.log(`Array after adding is ${arr}`);
                     // total += sum;
                     arrLength -= 2;
@@ -124,8 +136,7 @@ const calculatorSlice = createSlice({
                         continue;
                     }
                 }
-                const minus = arr.includes('-');
-                total += sum;
+                total += tempTotal;
             }
             state.total = total;
         }
