@@ -5,11 +5,23 @@ export const calculatingTotalValue = (arrayValue) => {
     console.log('...... from while loop', {arr: [...arrayValue]});
     while(arrLength > 2){
         let tempTotal = 0;
+        const division = arr.includes('/');
+        const divisionIndex = arr.findIndex(a => a === '/');
+        if(division && arr[divisionIndex+1] !== undefined) {
+            const preNum = +arr[divisionIndex-1];
+            const postNum = +arr[divisionIndex+1];
+            tempTotal = preNum / postNum;
+            arr.splice(divisionIndex-1, 3, tempTotal);
+            arrLength -= 2;
+            if(arrLength > 2) {
+                continue;
+            }
+        }
         const multiply = arr.includes('*');
-        if(multiply) {
-            const multiplyIndex = arr.findIndex(a => a === '*');
+        const multiplyIndex = arr.findIndex(a => a === '*');
+        if(multiply && arr[multiplyIndex+1] !== undefined) {
             const preNum = +arr[multiplyIndex-1];
-            const postNum = arr[multiplyIndex+1] === '' ? 1 : +arr[multiplyIndex+1];
+            const postNum = +arr[multiplyIndex+1];
             tempTotal = preNum * postNum;
             arr.splice(multiplyIndex-1,3,tempTotal);
             arrLength -= 2;
@@ -31,8 +43,8 @@ export const calculatingTotalValue = (arrayValue) => {
             }
         }
         const add = arr.includes('+');
-        if(add){
-            const addIndex = arr.findIndex(a => a === '+');
+        const addIndex = arr.findIndex(a => a === '+');
+        if(add && arr[addIndex+1] !== undefined){
             const preNum = +arr[addIndex-1];
             const postNum = +arr[addIndex+1];
             tempTotal = preNum + postNum;

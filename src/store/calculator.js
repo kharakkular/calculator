@@ -26,7 +26,7 @@ const calculatorSlice = createSlice({
             // if(['+','-','*','/'].includes(arr[arr.length -1])) {
             //     currentValue = arr[arr.length-1];
             // }
-            if(currentValue.length === 1) {
+            if(currentValue.length === 1 && arr.length === 1 && arr[0].length === 1) {
                 if(currentValue === '0'){
                     return;
                 }
