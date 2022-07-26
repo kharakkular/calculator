@@ -44,6 +44,7 @@ const Keypad = props => {
     }, [keyPressed, dispatch]);
 
     useEffect(() => {
+        console.log('Value of isNewNumber is ', {isNewNumber});
         if(isNewNumber) {
             const tempObj = {
                 key: keyPressed,
@@ -61,7 +62,7 @@ const Keypad = props => {
         if(['+','-','*','/'].includes(keyPressed)){
             dispatch(calculatorActions.changeOperationSign(keyPressed));
         }
-    },[dispatch, keyPressed])
+    },[dispatch, keyPressed]);
 
     return (
         <div className={classes.keypad}>

@@ -2,6 +2,7 @@ export const calculatingTotalValue = (arrayValue) => {
     const arr = [...arrayValue];
     let arrLength = arr.length;
     let total = 0;
+    console.log('...... from while loop', {arr: [...arrayValue]});
     while(arrLength > 2){
         let tempTotal = 0;
         const multiply = arr.includes('*');
@@ -17,9 +18,10 @@ export const calculatingTotalValue = (arrayValue) => {
             }
         }
         const minus = arr.includes('-');
-        if(minus) {
-            const minusIndex = arr.findIndex(a => a === '-');
+        const minusIndex = arr.findIndex(a => a === '-');
+        if(minus && arr[minusIndex+1] !== undefined) {
             let preNum = +arr[minusIndex-1];
+            console.log('Value from minus', {postNum: arr[minusIndex+1]});
             let postNum = +arr[minusIndex+1];
             tempTotal = preNum - postNum;
             arr.splice(minusIndex-1, 3, tempTotal);

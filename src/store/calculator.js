@@ -20,9 +20,13 @@ const calculatorSlice = createSlice({
             state.equation = [];
         },
         backspaceCurrentNumberValue(state){
-            let currentValue = state.currentNumber;
+            // let currentValue = state.currentNumber;
             const arr = [...state.equation];
-            if(currentValue.length === 1 && arr.length === 1 && arr[0] === '0') {
+            let currentValue = arr[arr.length-1];
+            // if(['+','-','*','/'].includes(arr[arr.length -1])) {
+            //     currentValue = arr[arr.length-1];
+            // }
+            if(currentValue.length === 1) {
                 if(currentValue === '0'){
                     return;
                 }
@@ -30,16 +34,27 @@ const calculatorSlice = createSlice({
                 state.equation[state.equation.length -1] = '0';
                 return;
             }
-            if(arr[arr.length -1] === '') {
-                arr.pop();
-                currentValue = arr[arr.length-1];
-            }
+            // if(currentValue === '') {
+            //     currentValue = arr[arr.length-1];
+            // }
+            // if(arr[arr.length -1] === '') {
+            //     arr.pop();
+            //     currentValue = arr[arr.length-1];
+            // }
             const numArray = currentValue.split('');
-            numArray.pop();
-            state.currentNumber = numArray.join('');
-            arr[arr.length - 1] = numArray.join('');
+            const removedElement = numArray.pop();
+            if(['+','-','*','/'].includes(removedElement)){
+                state.isNewNumber = true;
+            }
+            if(numArray.length === 0){
+                arr.pop();
+            } else {
+                arr[arr.length - 1] = numArray.join('');
+            }
+            state.currentNumber = arr[arr.length-1];
             state.equation = arr;
-            state.total = calculatingTotalValue(arr);
+            console.log('Value of arr from backspace for calculating total is ', {arr: arr});
+            state.total = calculatingTotalValue([...arr]);
         },
         keypadButtonValue(state, action){
             const keyPressed = action.payload;
@@ -80,20 +95,27 @@ const calculatorSlice = createSlice({
         },
         recordingNumbersAndOperations(state, action){
             const length = state.equation.length;
+            console.log('+++++', {length, arr: [...state.equation]});
             if(['1','2','3','4','5','6','7','8','9','0','.'].includes(action.payload.key)){
                 if(length === 0){
                     state.equation.push(action.payload.number);
                 }
-                state.equation[length-1] = action.payload.number;
+                if(['+','-','*','/'].includes(state.equation[length-1])){
+                    state.equation.push(action.payload.number);
+                } else {
+                    state.equation[length-1] = action.payload.number;
+                }
             }
             if(['+','-','*','/'].includes(action.payload.key) && length !== 0){
-                if(state.equation[length-1] === '' && ['+','-','*','/'].includes(state.equation[length-2])){
-                    state.equation[length-2] = action.payload.key;
-                }
-                state.equation.push(state.buttonPressed, '');
+                // if(state.equation[length-1] === '' && ['+','-','*','/'].includes(state.equation[length-2])){
+                //     state.equation[length-2] = action.payload.key;
+                // }
+                state.equation.push(action.payload.key);
                 state.currentNumber = '';
                 state.isNewNumber = false;
             }
+            console.log('+++++', {length, arr: [...state.equation]});
+            const arr = [...state.equation];
         },
         calculateTotal(state) {
             const arr = [...state.equation];
@@ -101,8 +123,8 @@ const calculatorSlice = createSlice({
         },
         changeOperationSign(state,action){
             const length = state.equation.length;
-            if(state.equation[length-1] === '' && ['+','-','*','/'].includes(state.equation[length-2])){
-                state.equation[length-2] = action.payload;
+            if(['+','-','*','/'].includes(state.equation[length-1])){
+                state.equation[length-1] = action.payload;
             }
         }
     }
