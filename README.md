@@ -12,5 +12,4 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Calculator Web App
-![](images/Dark_theme_calculator.jpg)
-![](images/light_theme_calculator.jpg)
+![](images/Dark_theme_calculator.jpg)![](images/light_theme_calculator.jpg)
