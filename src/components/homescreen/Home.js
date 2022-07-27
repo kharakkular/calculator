@@ -30,7 +30,7 @@ const Home = (props) => {
             onToggleRef.current.style.display = "none";
             document.documentElement.style.setProperty('--color-primary', 'rgb(57,67,81)');
             document.documentElement.style.setProperty('--color-text-primary', 'white');
-            document.documentElement.style.setProperty('--shadow--primary', 'rgb(211, 128, 95)');
+            document.documentElement.style.setProperty('--shadow--primary', 'rgb(0,0,0.2)');
             document.documentElement.style.setProperty('--color-border-primary', 'rgb(57,67,90)');
             document.documentElement.style.setProperty('--shadow--primary-active', 'rgb(0,0,0.2)');
         }
