@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector} from 'react-redux';
 
 import ActiveScreen from "./active-screen/ActiveScreen";
+import ResultScreen from './result-screen/ResultScreen';
 import classes from './Screen.module.css';
 
 const Screen = props => {
@@ -20,9 +21,11 @@ const Screen = props => {
     }, [number, equation]);
 
     return (
-        <div className={classes.screen}>
-            <div className={classes.result}>{total}</div>
-            <ActiveScreen value={typedValue} />
+        <div className={classes.screenContainer}>
+            <div className={classes.screen}>
+                <ResultScreen total={total} />
+                <ActiveScreen value={typedValue} />
+            </div>
         </div>
     );
 }

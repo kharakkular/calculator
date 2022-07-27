@@ -5,7 +5,6 @@ const ActiveScreen = props => {
     const { value } = props;
     return (
         <div className={classes.typedValue}>
-            <span className={classes.equalSign}><i className="fa-solid fa-equals"></i></span>
             <span>{value === '' ? '0' : value}</span>
         </div>
     );

@@ -1,0 +1,12 @@
+:root {
+    --color-primary: rgb(57,67,81);
+    --color-secondary: white;
+    --shadow--primary: rgb(0,0,0.2);
+    --shadow--primary-active: rgb(243, 174, 134);
+    --color-text-primary: white;
+    --color-text-secondary: black;
+    --color-border-primary: rgb(57,67,90);
+}
+/* --shadow--primary: rgb(211, 128, 95); */
+/* --color-text-primary: rgb(121, 45, 15); */
+/* --color-border-primary: rgb(175, 172, 172); */

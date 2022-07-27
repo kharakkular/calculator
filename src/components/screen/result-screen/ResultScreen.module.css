@@ -1,0 +1,19 @@
+.resultContainer {
+    position: relative;
+
+}
+
+.result {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.equalSign {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    z-index: 1;
+    margin-left: .5rem;
+    font-size: 2rem;
+    background-color: var(--color-primary);
+}

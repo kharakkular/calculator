@@ -9,6 +9,27 @@
 
 .main {
     grid-row: 2 / span 1;
-    background-color: rgb(57,67,81);
+    background-color: var(--color-primary);
     border-radius: 30px;
+    position: relative;
+    color: var(--color-text-primary);
+}
+
+.theme {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    font-size: 1.9rem;
+    z-index: 1;
+}
+
+.toggleOn {
+    display: none;
+}
+
+
+.toggleOff {
+    display: inline;
 }

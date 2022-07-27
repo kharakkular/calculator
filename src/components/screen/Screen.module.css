@@ -1,15 +1,22 @@
+.screenContainer {
+    height: 200px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: .5rem;
+}
+
 .screen {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     height: 35%;
+    width: 100%;
     padding: .5rem;
     font-size: 2rem;
     border: none;
-}
-
-.result {
-    display: flex;
-    justify-content: flex-end;
+    box-shadow: inset 1px 1px 10px gray;
+    height: 130px;
+    border-radius: 10px;
 }

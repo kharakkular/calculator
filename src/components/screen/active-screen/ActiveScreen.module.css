@@ -5,14 +5,3 @@
     flex-wrap: wrap;
     overflow: hidden;
 }
-
-.equalSign {
-    position: absolute;
-    left: 0;
-    bottom: 5px;
-    z-index: 1;
-    margin-left: .5rem;
-    font-size: 2rem;
-    background-color: rgb(57,67,81);
-    padding: 0 .5rem;
-}
