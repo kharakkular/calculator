@@ -55,8 +55,10 @@ const Keypad = props => {
     }, [currentNumber,dispatch,keyPressed, isNewNumber]);
 
     useEffect(() => {
-        dispatch(calculatorActions.calculateTotal());
-    }, [dispatch, currentNumber]);
+        if(keyPressed === '=') {
+            dispatch(calculatorActions.calculateTotal());
+        }
+    }, [dispatch, keyPressed]);
 
     useEffect(()=>{
         if(['+','-','*','/'].includes(keyPressed)){

@@ -11,10 +11,6 @@ const Screen = props => {
     const equation = useSelector(state => state.calculator.equation);
     let total = useSelector(state => state.calculator.total);
     const [typedValue, setTypedValue] = useState();
-
-    if(equation.length < 3 ) {
-        total = 'ANS';
-    }
  
     useEffect(()=> {
         setTypedValue(equation.join(''));

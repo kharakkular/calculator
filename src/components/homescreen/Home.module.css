@@ -3,8 +3,8 @@
     grid-template-columns: minmax(350px, 350px);
     grid-template-rows: 10vh 80vh 10vh;
     justify-content: center;
-    color: white;
-    background-color: rgb(223, 238, 253);
+    color: rgb(254, 254, 254);
+    background-color: var(--color-text-secondary);
 }
 
 .main {
