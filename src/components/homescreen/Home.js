@@ -20,11 +20,11 @@ const Home = (props) => {
             offToggleRef.current.style.display = "none";
             onToggleRef.current.style.display = "inline";
             document.documentElement.style.setProperty('--color-primary', 'rgb(240, 239, 239)');
-            document.documentElement.style.setProperty('--color-text-primary', 'rgb(243, 174, 134)');
+            document.documentElement.style.setProperty('--color-text-primary', 'rgb(212, 82, 30)');
             document.documentElement.style.setProperty('--shadow--primary', 'rgb(211, 128, 95)');
             document.documentElement.style.setProperty('--color-border-primary', 'rgb(234, 234, 234)');
             document.documentElement.style.setProperty('--shadow--primary-active', 'rgb(0,0,0.2)');
-            // document.documentElement.style.setProperty('--color-text-secondary', 'white');
+            document.documentElement.style.setProperty('--color-text-secondary', 'white');
 
         } else {
             offToggleRef.current.style.display = "inline";
@@ -34,7 +34,7 @@ const Home = (props) => {
             document.documentElement.style.setProperty('--shadow--primary', 'rgb(0,0,0.2)');
             document.documentElement.style.setProperty('--color-border-primary', 'rgb(57,67,90)');
             document.documentElement.style.setProperty('--shadow--primary-active', 'rgb(0,0,0.2)');
-            // document.documentElement.style.setProperty('--color-text-secondary', 'black');
+            document.documentElement.style.setProperty('--color-text-secondary', 'black');
         }
         console.log('Clicked');
     }
