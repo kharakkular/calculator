@@ -4,14 +4,14 @@
 // import { useSelector } from 'react-redux';
 
 // import store from '../../store';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Keypad from '../keypad/Keypad';
 import Screen from '../screen/Screen';
 import classes from './Home.module.css';
 
 const Home = (props) => {
 
-    const [themeText, setThemeText] = useState('Dark');
+    // const [themeText, setThemeText] = useState('Dark');
     const onToggleRef = useRef();
     const offToggleRef = useRef();
 
