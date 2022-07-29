@@ -51,7 +51,12 @@ const calculatorSlice = createSlice({
             } else {
                 arr[arr.length - 1] = numArray.join('');
             }
-            state.currentNumber = arr[arr.length-1];
+            // for checking if the last number is a operation sign. If yes set the current number to 0
+            if(['+','-','*','/'].includes(arr[arr.length-1])) {
+                state.currentNumber = '0';
+            } else {
+                state.currentNumber = arr[arr.length-1];
+            }
             state.equation = arr;
             console.log('Value of arr from backspace for calculating total is ', {arr: arr});
             state.total = calculatingTotalValue([...arr]);
