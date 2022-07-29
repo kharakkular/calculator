@@ -112,15 +112,14 @@ const calculatorSlice = createSlice({
                 }
             }
             if(['+','-','*','/'].includes(action.payload.key) && length !== 0){
-                // if(state.equation[length-1] === '' && ['+','-','*','/'].includes(state.equation[length-2])){
-                //     state.equation[length-2] = action.payload.key;
-                // }
+                if(['+','-','*','/'].includes(state.equation[length-1])){
+                    state.equation[length-1] = action.payload.key;
+                    return;
+                }
                 state.equation.push(action.payload.key);
                 state.currentNumber = '';
                 state.isNewNumber = false;
             }
-            console.log('+++++', {length, arr: [...state.equation]});
-            const arr = [...state.equation];
         },
         calculateTotal(state) {
             const arr = [...state.equation];
